@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Test — FastAPI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="styles.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });"></script>
+<script defer src="visibility.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+<nav class="topnav">
+  <a href="index.html">Vectors</a>
+  <a href="fastapi.html" class="active">FastAPI</a>
+</nav>
+<header>
+  <h1>Practice Test</h1>
+  <p>FastAPI. Try each question on paper first, then click <em>Show Answer</em> to check.</p>
+</header>
+
+<main id="questions">
+
+  <section class="question" data-key="api-1">
+    <div class="question-header">
+      <span class="question-number">Question 1</span>
+      <span class="question-type">code from memory</span>
+    </div>
+    <div class="prompt">
+      <p>Assume the imports and the app instance are already in place:</p>
+<pre><code>from fastapi import FastAPI
+
+app = FastAPI()
+</code></pre>
+      <p>Write a single <code>GET</code> endpoint that returns the string <code>"Hello"</code>.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+<pre><code>@app.get("/hello")
+def hello():
+    return "Hello"
+</code></pre>
+      <p><strong>Reasoning.</strong> An endpoint in FastAPI has two parts:</p>
+      <ul>
+        <li>A decorator <code>@app.get(...)</code> that binds the function below it to an HTTP method and URL path. Here <code>GET /hello</code>.</li>
+        <li>A function whose return value becomes the response body. Returning the Python string <code>"Hello"</code> produces the JSON response <code>"Hello"</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-2">
+    <div class="question-header">
+      <span class="question-number">Question 2</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Your app is running and its base URL is <code>homepage</code>. You want to test the endpoint from the previous question:</p>
+<pre><code>@app.get("/hello")
+def hello():
+    return "Hello"
+</code></pre>
+      <p>What URL would you put in the browser's address bar to hit this endpoint directly?</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><code>homepage/hello</code></p>
+      <p><strong>Reasoning.</strong> The full URL for a FastAPI endpoint is the app's base URL followed by the path given to the decorator. The decorator was <code>@app.get("/hello")</code>, so the path is <code>/hello</code>. Appending that to the base URL <code>homepage</code> gives <code>homepage/hello</code>. Typing that in the browser issues a <code>GET</code> request — the method the endpoint is registered for — and the browser displays the returned string.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-3">
+    <div class="question-header">
+      <span class="question-number">Question 3</span>
+      <span class="question-type">code from memory</span>
+    </div>
+    <div class="prompt">
+      <p>Assume the imports and the app instance are already in place:</p>
+<pre><code>from fastapi import FastAPI
+
+app = FastAPI()
+</code></pre>
+      <p>Write a <code>GET</code> endpoint that takes in an integer and returns its square.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+<pre><code>@app.get("/square")
+def square(n: int):
+    return n * n
+</code></pre>
+      <p><strong>Reasoning.</strong> In FastAPI, any function parameter that does <em>not</em> appear in the decorator's path is treated as a query parameter. Since <code>{n}</code> is not in the path <code>/square</code>, <code>n</code> becomes a query parameter. The <code>: int</code> annotation tells FastAPI to parse the value from the URL (a string) into an <code>int</code>, and to reject the request with a validation error if it isn't a valid integer.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-4">
+    <div class="question-header">
+      <span class="question-number">Question 4</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Your app is running and its base URL is <code>homepage</code>. You want to test the endpoint from the previous question with <code>n = 5</code>. What URL would you put in the browser's address bar?</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><code>homepage/square?n=5</code></p>
+      <p><strong>Reasoning.</strong> Query parameters come after the path, separated by a <code>?</code>, and each one is written as <code>name=value</code>. The endpoint's path is <code>/square</code> and the query parameter is <code>n</code>, so passing <code>5</code> means appending <code>?n=5</code>. The full URL is the base URL plus the path plus the query string: <code>homepage/square?n=5</code>.</p>
+      <p>If there were more than one query parameter, they would be joined with <code>&amp;</code> — e.g., <code>?n=5&amp;m=3</code>.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-5">
+    <div class="question-header">
+      <span class="question-number">Question 5</span>
+      <span class="question-type">code from memory</span>
+    </div>
+    <div class="prompt">
+      <p>Assume the imports and the app instance are already in place:</p>
+<pre><code>from fastapi import FastAPI
+
+app = FastAPI()
+</code></pre>
+      <p>Write a <code>GET</code> endpoint that takes in two integers and returns their sum.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+<pre><code>@app.get("/sum")
+def add(a: int, b: int):
+    return a + b
+</code></pre>
+      <p><strong>Reasoning.</strong> Neither <code>a</code> nor <code>b</code> appears in the decorator's path, so both are query parameters. Each <code>: int</code> annotation tells FastAPI to parse that value from the URL as an integer and to reject the request with a validation error if it isn't one. The function returns <code>a + b</code>, which FastAPI serializes as JSON.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-6">
+    <div class="question-header">
+      <span class="question-number">Question 6</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Your app is running and its base URL is <code>homepage</code>. You want to test the endpoint from the previous question with <code>a = 7</code> and <code>b = 4</code>. What URL would you put in the browser's address bar?</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><code>homepage/sum?a=7&amp;b=4</code></p>
+      <p><strong>Reasoning.</strong> The query string starts with <code>?</code>, and multiple query parameters are joined with <code>&amp;</code>. The endpoint's path is <code>/sum</code> and its parameters are <code>a</code> and <code>b</code>, so appending <code>?a=7&amp;b=4</code> to the base URL plus path gives <code>homepage/sum?a=7&amp;b=4</code>. The order of the parameters in the query string doesn't matter — <code>?b=4&amp;a=7</code> would work equally well.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="api-7">
+    <div class="question-header">
+      <span class="question-number">Question 7</span>
+      <span class="question-type">matching</span>
+    </div>
+    <div class="prompt">
+      <p>In a FastAPI + SQLModel app, <code>Inventory</code> is a table model and <code>engine</code> is its database connection. Below are four endpoint function bodies (the decorators have been removed). Match each function to the English description of what it does.</p>
+
+      <p><strong>Function 1</strong></p>
+<pre><code>def operation_1(item: Inventory):
+    with Session(engine) as session:
+        session.add(item)
+        session.commit()
+        session.refresh(item)
+        return item
+</code></pre>
+
+      <p><strong>Function 2</strong></p>
+<pre><code>def operation_2(id: int):
+    with Session(engine) as session:
+        statement = select(Inventory).where(Inventory.id == id)
+        record = session.exec(statement).one()
+        session.delete(record)
+        session.commit()
+        return {"deleted": id}
+</code></pre>
+
+      <p><strong>Function 3</strong></p>
+<pre><code>def operation_3():
+    with Session(engine) as session:
+        statement = select(Inventory)
+        items = session.exec(statement).all()
+        return items
+</code></pre>
+
+      <p><strong>Function 4</strong></p>
+<pre><code>def operation_4(id: int, item: Inventory):
+    with Session(engine) as session:
+        statement = select(Inventory).where(Inventory.id == id)
+        record = session.exec(statement).one()
+        record.name = item.name
+        record.quantity = item.quantity
+        record.price = item.price
+        session.add(record)
+        session.commit()
+        session.refresh(record)
+        return record
+</code></pre>
+
+      <p>Descriptions:</p>
+      <ol type="A">
+        <li>Remove a single row from the <code>Inventory</code> table, looked up by its id.</li>
+        <li>Return every row currently stored in the <code>Inventory</code> table.</li>
+        <li>Insert a new row into the <code>Inventory</code> table.</li>
+        <li>Find a row by its id and overwrite its fields with new values.</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <ul>
+        <li>Function 1 &rarr; <strong>C</strong> (insert a new row)</li>
+        <li>Function 2 &rarr; <strong>A</strong> (remove a row by id)</li>
+        <li>Function 3 &rarr; <strong>B</strong> (return every row)</li>
+        <li>Function 4 &rarr; <strong>D</strong> (find by id and overwrite fields)</li>
+      </ul>
+      <p><strong>Reasoning.</strong> Read each body for the telltale SQLModel calls:</p>
+      <ul>
+        <li><strong>Function 1</strong> receives a whole <code>Inventory</code> object, calls <code>session.add(item)</code> followed by <code>commit</code>, and returns the refreshed object. <code>add</code> + <code>commit</code> with no prior lookup means <em>insert</em>.</li>
+        <li><strong>Function 2</strong> looks up a single row with <code>select(...).where(Inventory.id == id)</code>, then calls <code>session.delete(record)</code> and <code>commit</code>. That's a <em>delete</em>.</li>
+        <li><strong>Function 3</strong> does <code>select(Inventory)</code> with no <code>where</code> clause and uses <code>.all()</code> to return every matching row. With no filter, that's <em>read all</em>.</li>
+        <li><strong>Function 4</strong> looks up a row by id, then reassigns its attributes from the incoming <code>item</code> before committing. That's an <em>update</em>.</li>
+      </ul>
+      <p>The decorators for these in the warehouse app were <code>@app.post("/inventory")</code>, <code>@app.delete("/inventory/{id}")</code>, <code>@app.get("/inventory")</code>, and <code>@app.put("/inventory/{id}")</code> respectively — but you can tell what each one does just by reading the body.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>Good luck!</footer>
+</body>
+</html>

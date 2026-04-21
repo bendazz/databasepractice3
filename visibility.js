@@ -1,0 +1,17 @@
+const VISIBLE_KEYS = [
+  "vec-1",
+  "vec-2",
+  "vec-3",
+  "vec-4",
+  "vec-5",
+  "vec-6",
+  "vec-7",
+  "vec-8",
+  "api-1",
+  "api-2",
+  "api-3",
+  "api-4",
+  "api-5",
+  "api-6",
+  "api-7",
+];

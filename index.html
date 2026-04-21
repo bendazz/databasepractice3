@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Test — Vectors</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="styles.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+    ]
+  });"></script>
+<script defer src="visibility.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+<nav class="topnav">
+  <a href="index.html" class="active">Vectors</a>
+  <a href="fastapi.html">FastAPI</a>
+</nav>
+<header>
+  <h1>Practice Test</h1>
+  <p>Vectors. Try each question on paper first, then click <em>Show Answer</em> to check.</p>
+</header>
+
+<main id="questions">
+
+  <section class="question" data-key="vec-1">
+    <div class="question-header">
+      <span class="question-number">Question 1</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Given the two 3-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 4 \\ 2 \\ -2 \end{bmatrix},$$
+      <p>compute the dot product $\mathbf{a} \cdot \mathbf{b}$.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p>$\mathbf{a} \cdot \mathbf{b} = 0$.</p>
+      <p><strong>Reasoning.</strong> The dot product of two vectors of the same length is the sum of the products of corresponding entries.</p>
+      <ul>
+        <li>$2 \cdot 4 = 8$</li>
+        <li>$(-1) \cdot 2 = -2$</li>
+        <li>$3 \cdot (-2) = -6$</li>
+        <li>Sum: $8 + (-2) + (-6) = 0$.</li>
+      </ul>
+      <p>A dot product of zero means the vectors are orthogonal (perpendicular).</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-2">
+    <div class="question-header">
+      <span class="question-number">Question 2</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Given the 3-dimensional vector</p>
+      $$\mathbf{v} = \begin{bmatrix} 1 \\ 4 \\ 8 \end{bmatrix},$$
+      <p>compute its magnitude $\|\mathbf{v}\|$.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p>$\|\mathbf{v}\| = 9$.</p>
+      <p><strong>Reasoning.</strong> The magnitude (Euclidean / L2 norm) of a vector is the square root of the sum of the squares of its entries.</p>
+      <ul>
+        <li>$1^2 = 1$</li>
+        <li>$4^2 = 16$</li>
+        <li>$8^2 = 64$</li>
+        <li>Sum: $1 + 16 + 64 = 81$.</li>
+        <li>$\sqrt{81} = 9$.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-3">
+    <div class="question-header">
+      <span class="question-number">Question 3</span>
+      <span class="question-type">short answer</span>
+    </div>
+    <div class="prompt">
+      <p>Given the two 3-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 2 \\ 1 \\ 2 \end{bmatrix},$$
+      <p>compute their cosine similarity.</p>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p>$\cos\theta = \dfrac{8}{9}$.</p>
+      <p><strong>Reasoning.</strong> Compute the dot product and each magnitude, then divide.</p>
+      <ul>
+        <li>Dot product: $1\cdot 2 + 2\cdot 1 + 2\cdot 2 = 2 + 2 + 4 = 8$.</li>
+        <li>$\|\mathbf{a}\| = \sqrt{1^2 + 2^2 + 2^2} = \sqrt{9} = 3$.</li>
+        <li>$\|\mathbf{b}\| = \sqrt{2^2 + 1^2 + 2^2} = \sqrt{9} = 3$.</li>
+        <li>$\cos\theta = \dfrac{8}{3 \cdot 3} = \dfrac{8}{9}$.</li>
+      </ul>
+      <p>A value close to 1 means the two vectors point in nearly the same direction.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-4">
+    <div class="question-header">
+      <span class="question-number">Question 4</span>
+      <span class="question-type">multiple choice</span>
+    </div>
+    <div class="prompt">
+      <p>Consider the two 4-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 1 \\ 2 \\ -1 \\ 1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 2 \\ -1 \\ 1 \\ 1 \end{bmatrix}.$$
+      <p>Which statement best describes the relationship between $\mathbf{a}$ and $\mathbf{b}$?</p>
+      <ol type="A">
+        <li>They are perpendicular.</li>
+        <li>They point in the same direction.</li>
+        <li>They point in opposite directions.</li>
+        <li>None of the above.</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>A. They are perpendicular.</strong></p>
+      <p><strong>Reasoning.</strong> Compute the dot product:</p>
+      <ul>
+        <li>$1 \cdot 2 = 2$</li>
+        <li>$2 \cdot (-1) = -2$</li>
+        <li>$(-1) \cdot 1 = -1$</li>
+        <li>$1 \cdot 1 = 1$</li>
+        <li>Sum: $2 + (-2) + (-1) + 1 = 0$.</li>
+      </ul>
+      <p>A dot product of $0$ means the vectors are perpendicular (orthogonal). Vectors pointing in the same direction would have a positive dot product equal to $\|\mathbf{a}\|\,\|\mathbf{b}\|$, and opposite directions would give the negative of that product.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-5">
+    <div class="question-header">
+      <span class="question-number">Question 5</span>
+      <span class="question-type">multiple choice</span>
+    </div>
+    <div class="prompt">
+      <p>Consider the two 4-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 1 \\ -2 \\ 3 \\ -1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 3 \\ -6 \\ 9 \\ -3 \end{bmatrix}.$$
+      <p>Which statement best describes the relationship between $\mathbf{a}$ and $\mathbf{b}$?</p>
+      <ol type="A">
+        <li>They are perpendicular.</li>
+        <li>They point in the same direction.</li>
+        <li>They point in opposite directions.</li>
+        <li>None of the above.</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>B. They point in the same direction.</strong></p>
+      <p><strong>Reasoning.</strong> Notice that each entry of $\mathbf{b}$ is exactly $3$ times the corresponding entry of $\mathbf{a}$:</p>
+      <ul>
+        <li>$3 = 3 \cdot 1$, $\;-6 = 3 \cdot (-2)$, $\;9 = 3 \cdot 3$, $\;-3 = 3 \cdot (-1)$.</li>
+        <li>So $\mathbf{b} = 3\mathbf{a}$, a positive scalar multiple of $\mathbf{a}$.</li>
+      </ul>
+      <p>When one vector is a positive scalar multiple of the other, they point in the same direction (cosine similarity $= 1$). A negative scalar would mean opposite directions, and a dot product of $0$ would mean perpendicular.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-6">
+    <div class="question-header">
+      <span class="question-number">Question 6</span>
+      <span class="question-type">multiple choice</span>
+    </div>
+    <div class="prompt">
+      <p>Consider the two 4-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 2 \\ 1 \\ -3 \\ 1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} -4 \\ -2 \\ 6 \\ -2 \end{bmatrix}.$$
+      <p>Which statement best describes the relationship between $\mathbf{a}$ and $\mathbf{b}$?</p>
+      <ol type="A">
+        <li>They are perpendicular.</li>
+        <li>They point in the same direction.</li>
+        <li>They point in opposite directions.</li>
+        <li>None of the above.</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>C. They point in opposite directions.</strong></p>
+      <p><strong>Reasoning.</strong> Each entry of $\mathbf{b}$ is exactly $-2$ times the corresponding entry of $\mathbf{a}$:</p>
+      <ul>
+        <li>$-4 = -2 \cdot 2$, $\;-2 = -2 \cdot 1$, $\;6 = -2 \cdot (-3)$, $\;-2 = -2 \cdot 1$.</li>
+        <li>So $\mathbf{b} = -2\mathbf{a}$, a negative scalar multiple of $\mathbf{a}$.</li>
+      </ul>
+      <p>When one vector is a negative scalar multiple of the other, they point in opposite directions (cosine similarity $= -1$).</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-7">
+    <div class="question-header">
+      <span class="question-number">Question 7</span>
+      <span class="question-type">multiple choice</span>
+    </div>
+    <div class="prompt">
+      <p>Consider the two 4-dimensional vectors</p>
+      $$\mathbf{a} = \begin{bmatrix} 1 \\ 2 \\ 1 \\ -1 \end{bmatrix}, \qquad \mathbf{b} = \begin{bmatrix} 2 \\ 1 \\ 3 \\ 1 \end{bmatrix}.$$
+      <p>Which statement best describes the relationship between $\mathbf{a}$ and $\mathbf{b}$?</p>
+      <ol type="A">
+        <li>They are perpendicular.</li>
+        <li>They point in the same direction.</li>
+        <li>They point in opposite directions.</li>
+        <li>None of the above.</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>D. None of the above.</strong></p>
+      <p><strong>Reasoning.</strong> Check each possibility:</p>
+      <ul>
+        <li>Dot product: $1\cdot 2 + 2\cdot 1 + 1\cdot 3 + (-1)\cdot 1 = 2 + 2 + 3 - 1 = 6$. Since this is not $0$, the vectors are <em>not</em> perpendicular.</li>
+        <li>For same or opposite direction, $\mathbf{b}$ would need to be a scalar multiple of $\mathbf{a}$. The entry ratios $b_i / a_i$ are $2,\ \tfrac{1}{2},\ 3,\ -1$ — not all equal — so $\mathbf{b}$ is not a scalar multiple of $\mathbf{a}$.</li>
+      </ul>
+      <p>The vectors are neither perpendicular nor parallel, so the correct choice is <strong>none of the above</strong>.</p>
+    </div>
+  </section>
+
+  <section class="question" data-key="vec-8">
+    <div class="question-header">
+      <span class="question-number">Question 8</span>
+      <span class="question-type">multiple choice</span>
+    </div>
+    <div class="prompt">
+      <p>A vector database stores three short documents along with their 2-dimensional embeddings:</p>
+      <ul>
+        <li><strong>Doc A:</strong> "Please take out the recycling bin." &nbsp;&rarr;&nbsp; $(-3,\ 4)$</li>
+        <li><strong>Doc B:</strong> "Mars is the fourth planet from the Sun." &nbsp;&rarr;&nbsp; $(4,\ 3)$</li>
+        <li><strong>Doc C:</strong> "She finished the novel in two days." &nbsp;&rarr;&nbsp; $(-4,\ -3)$</li>
+      </ul>
+      <p>A user searches with the query</p>
+      <p><strong>Query:</strong> "The garden needs watering this afternoon." &nbsp;&rarr;&nbsp; $\mathbf{q} = (3,\ 4)$.</p>
+      <p>Which document should the vector database return as the most similar match?</p>
+      <ol type="A">
+        <li>Doc A</li>
+        <li>Doc B</li>
+        <li>Doc C</li>
+      </ol>
+    </div>
+    <button class="reveal" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer">
+      <div class="answer-label">Answer</div>
+      <p><strong>B. Doc B.</strong></p>
+      <p><strong>Reasoning.</strong> Every vector here has magnitude $\sqrt{3^2 + 4^2} = 5$, so each cosine similarity is the dot product divided by $5 \cdot 5 = 25$.</p>
+      <ul>
+        <li>$\mathbf{q} \cdot \text{A} = 3\cdot(-3) + 4\cdot 4 = 7 \;\Rightarrow\; \cos\theta = \tfrac{7}{25}$</li>
+        <li>$\mathbf{q} \cdot \text{B} = 3\cdot 4 + 4\cdot 3 = 24 \;\Rightarrow\; \cos\theta = \tfrac{24}{25}$</li>
+        <li>$\mathbf{q} \cdot \text{C} = 3\cdot(-4) + 4\cdot(-3) = -24 \;\Rightarrow\; \cos\theta = -\tfrac{24}{25}$</li>
+      </ul>
+      <p>Doc B has the highest cosine similarity, so it is the nearest neighbor the vector database would return. The sentences themselves are semantically unrelated — the decision comes purely from the geometry of the embeddings.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>Good luck!</footer>
+</body>
+</html>
